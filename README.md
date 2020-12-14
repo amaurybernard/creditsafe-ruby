@@ -13,7 +13,7 @@ registration number (and name in Germany), and retrieving company online reports
 Install the gem from RubyGems.org by adding the following to your `Gemfile`:
 
 ```ruby
-gem 'creditsafe', '~> 0.4.0'
+gem 'creditsafe', :git => 'https://github.com/amaurybernard/creditsafe-ruby.git'
 ```
 
 Just run `bundle install` to install the gem and its dependencies.
@@ -54,5 +54,5 @@ client.companies({ countries: "GB", regNo: "07495895" })
 ```
 
 
-Originaly form GoCardless ♥ open source. If you do too, come [join us](https://gocardless.com/jobs#software-engineer).
-Rewrite by [AH3](https://www.ah3.fr)
+Originaly form GoCardless ♥ open source. If you do too, come [join us](https://gocardless.com/jobs#software-engineer). 
+Rewrite for the new REST API by [AH3](https://www.ah3.fr)
