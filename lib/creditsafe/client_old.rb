@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
-require 'creditsafe/errors'
+require "securerandom"
+require "savon"
+require "excon"
 
-require 'creditsafe/authentication_token'
-require 'creditsafe/request/default'
-require 'creditsafe/request/authenticate'
-require 'creditsafe/request/companies'
+require "creditsafe/errors"
+
+require "creditsafe/request/authenticate"
 
 require "active_support/notifications"
 
@@ -13,29 +14,36 @@ module Creditsafe
   class Client
     ENVIRONMENTS = %i[live test].freeze
 
-    def initialize(username: nil, password: nil, environment: :live, log_level: :warn)
+    def initialize(username: nil, password: nil, savon_opts: {},
+                   environment: :live, log_level: :warn)
       raise ArgumentError, "Username must be provided" if username.nil?
       raise ArgumentError, "Password must be provided" if password.nil?
-      Request::Default.authentication_token = AuthenticationToken.new(username: username, password: password)
 
       unless ENVIRONMENTS.include?(environment.to_sym)
         raise ArgumentError, "Environment needs to be one of #{ENVIRONMENTS.join('/')}"
       end
 
-      @environment = environment.to_s
-      @log_level = log_level
+      @environment = environment.to_s #todo Implement
+      @log_level = log_level #todo Implement
       @username = username
       @password = password
     end
 
     # @return token
-    # For tests
     def authenticate
-      Request::Authenticate.new(username: @username, password: @password).fetch
+      Request::Authenticate.new
     end
 
-    def companies(search_criteria)
-      Request::Companies::new(search_criteria).fetch
+    def companies(search_criteria = {})
+      request = Creditsafe::Request::FindCompany.new(search_criteria)
+      response = invoke_soap(:find_companies, request.message)
+
+      companies = response.
+        fetch(:find_companies_response).
+        fetch(:find_companies_result).
+        fetch(:companies)
+
+      companies.nil? ? nil : companies.fetch(:company)
     end
 
     def company_report(creditsafe_id, custom_data: nil)
