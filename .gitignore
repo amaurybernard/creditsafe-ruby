@@ -1,3 +1,5 @@
 .bundle/
 bin/
 *.gem
+.idea/
+testing.rb

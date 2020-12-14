@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "spec_helper"
-require "creditsafe/client"
+require "creditsafe/client_old"
 require "timecop"
 
 URL = "https://webservices.creditsafe.com/GlobalData/1.3/"\
