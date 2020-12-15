@@ -33,7 +33,6 @@ module Creditsafe
           STDERR.puts body['message'] if body.has_key?('message')
           raise RequestError, message_starter + 'was not successful'
         end
-        raise RequestError, message_starter + 'has no or empty token' unless body.has_key?('token') && !body['token'].to_s.empty?
       end
 
     end
