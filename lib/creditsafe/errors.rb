@@ -3,6 +3,7 @@
 module Creditsafe
   class Error < StandardError; end
 
+  class ApiError < Error; end
   class AccountError < ApiError; end
   class RequestError < ApiError; end
   class ProcessingError < ApiError; end

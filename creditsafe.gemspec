@@ -19,8 +19,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "activesupport", ">= 4.2.0"
-  spec.add_runtime_dependency "excon", "~> 0.45"
-  spec.add_runtime_dependency "savon", "~> 2.8"
+  spec.add_runtime_dependency "httparty"
 
   spec.add_development_dependency "bundler", "~> 2"
   spec.add_development_dependency "compare-xml", "~> 0.5"
