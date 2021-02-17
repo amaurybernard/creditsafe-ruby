@@ -6,6 +6,7 @@ require 'creditsafe/authentication_token'
 require 'creditsafe/request/default'
 require 'creditsafe/request/authenticate'
 require 'creditsafe/request/companies'
+require 'creditsafe/request/company'
 
 require "active_support/notifications"
 
@@ -38,16 +39,8 @@ module Creditsafe
       Request::Companies::new(search_criteria).fetch
     end
 
-    def company_report(creditsafe_id, custom_data: nil)
-      request =
-        Creditsafe::Request::CompanyReport.new(creditsafe_id, custom_data)
-      response = invoke_soap(:retrieve_company_online_report, request.message)
-
-      response.
-        fetch(:retrieve_company_online_report_response).
-        fetch(:retrieve_company_online_report_result).
-        fetch(:reports).
-        fetch(:report)
+    def company(creditsafe_id, params: nil)
+      Request::Company::new(creditsafe_id, params: params).fetch
     end
 
     def inspect
