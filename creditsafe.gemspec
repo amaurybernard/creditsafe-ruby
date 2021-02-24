@@ -7,9 +7,9 @@ require "creditsafe/version"
 Gem::Specification.new do |spec|
   spec.name          = "creditsafe"
   spec.version       = Creditsafe::VERSION
-  spec.authors       = ["GoCardless Engineering"]
+  spec.authors       = ["GoCardless Engineering", "Amaury Bernard for AH3"]
   spec.email         = ["engineering@gocardless.com"]
-  spec.summary       = "Ruby client for the Creditsafe SOAP API"
+  spec.summary       = "Ruby client for the Creditsafe REST API"
   spec.homepage      = "https://github.com/gocardless/creditsafe-ruby"
   spec.license       = "MIT"
 
